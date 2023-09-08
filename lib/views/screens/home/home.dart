@@ -79,8 +79,20 @@ class _HomeState extends State<Home> {
                   const SizedBox(height: 10,),
                   myCustomTextFormField(
                       controller: _homeVM.getPasswordController(),
-                      hintText: 'Contraseña', obscureText: true
+                      hintText: 'Contraseña', obscureText: true,
+                      onChanged: (value) {
+                      setState(() {
+                      _homeVM.validatePassword();
+                        });
+                     }
                   ),
+
+                  const SizedBox(height: 10,),
+                  _homeVM.getIsValidPassword()? const SizedBox(height: 10,) : Text('error contraseña debil'),
+                  const SizedBox(height: 10,),
+                  TextButton(onPressed: (){
+                    Navigator.pushNamed(context, '/profile');
+                  }, child: Text('Ir perfil'))
                 ],
               ),
             ),
